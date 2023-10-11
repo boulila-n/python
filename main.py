@@ -40,9 +40,7 @@ def getBookInformations(url, path):
 
         infos = pd.DataFrame([[title.text, rating.attrs.get('class')[1], td[2].text, td[3].text, td[5].text, p[3].text, a[3].text, srcUrl, url]],
                              columns=['title', 'review_rating', 'price_including_tax','price_excluding_tax','number_available','product_description','Category','image_url','product_page_url'])
-
         infos.to_csv(path, mode='a', header= False, index=False)
-
 
 
   except Exception as e:
@@ -60,9 +58,12 @@ def getCategoryPage(url1, path):
             getBookInformations('http://books.toscrape.com/catalogue/'+url2[9:l], path)
 
         next = soup.find('li', {'class': 'next'})
+        index =  url1.rsplit('/', 1)[1]
         if next:
-            next_url = url1.replace('index.html', next.find('a').get('href'))
+            next_url = url1.replace(index, next.find('a').get('href'))
             getCategoryPage(next_url, path)
+
+
 
 
 ## methode main
@@ -76,7 +77,7 @@ if response.ok:
         urlc = links[i].get('href')
         cg_name = urlc[25:len(urlc)].replace('/index.html', '')
 
-        path = './venv/data/'+cg_name+".csv"
+        path = 'data/'+cg_name+".csv"
         f = open(path, "x")
         infos = pd.DataFrame([],
                              columns=['title', 'review_rating', 'price_including_tax', 'price_excluding_tax',
