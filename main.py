@@ -76,7 +76,7 @@ if response.ok:
         urlc = links[i].get('href')
         cg_name = urlc[25:len(urlc)].replace('/index.html', '')
 
-        path = cg_name+".csv"
+        path = './venv/data/'+cg_name+".csv"
         f = open(path, "x")
         infos = pd.DataFrame([],
                              columns=['title', 'review_rating', 'price_including_tax', 'price_excluding_tax',
