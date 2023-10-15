@@ -5,7 +5,7 @@ import pandas as pd
 
 
 def downloadImg(srcUrl, imgname):
-    urllib.request.urlretrieve(srcUrl, './venv/images/'+ imgname[0:16]+'.jpg')
+    urllib.request.urlretrieve(srcUrl, 'images/'+ imgname[0:16]+'.jpg')
 
 def getBookInformations(url, path):
   try:
